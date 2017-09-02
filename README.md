@@ -33,17 +33,22 @@
 
 ### add
 
-* api '/menus/new'
+* api: '/menus/new'
 
-* params
+* method: post
 
-```
-menu-id: 1
-customer: 阿童木
+* params: 
+
+```json
+{
+    "menu_id": 1,
+    "customer": "阿童木"
+}
+
 ```
 example
 
-/menus/new?menu-id=1&customer=阿童木
+http://localhost:3000/menus/new?q={"menu_id":1,"customer":"阿童木"}
 
 response
 
@@ -52,11 +57,58 @@ response
   "status": "200",
   "msg": "下单成功！",
   "body": {
-    "id": "订单id",
+    "order_id": "订单id",
     "customer": "客户姓名",
-    "goods": "点单物品[商品1，商品2]",
-    "category"
+    "goods": "点单物品[{id: 1, name: 商品1, price: 1}，{id: 3, name: 商品3, price: 2}, ...]",
+    "create_at": "创建时间",
+    "update_at": "最后修改时间"
   }
 }
 ```
 
+### update
+
+* api: '/menus/update'
+
+* method: put
+
+* params
+
+```json
+{
+  "customer": "阿童木",
+  "goods": [
+    {
+      "id": "menu_id", 
+      "name": "商品1", 
+      "price": 1
+    },
+    {
+      "id": "menu_id", 
+      "name": "商品3", 
+      "price": 2
+      }
+    ]
+}
+```
+example
+
+http://localhost:3000/menus/update?q={"customer":"阿童木","goods":[{"id":"menu_id","name":"商品1","price":1},{"id":"menu_id","name":"商品3","price":2}]}
+
+response
+
+```json
+{
+  "status": "200",
+  "msg": "下单成功！",
+  "body": {
+    "order_id": "订单id",
+    "customer": "客户姓名",
+    "goods": "点单物品[{id: 1, name: 商品1, price: 1}，{id: 3, name: 商品3, price: 2}, ...]",
+    "create_at": "创建时间",
+    "update_at": "最后修改时间"
+  }
+}
+```
+
+TODO above
